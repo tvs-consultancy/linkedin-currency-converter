@@ -18,7 +18,7 @@ export default {
 		const url = new URL(request.url);
 
 		if (url.pathname !== '/convert' || request.method !== 'GET') {
-			return errorResponse('Not found. Use GET /convert', 404);
+			return errorResponse('Not found', 404);
 		}
 
 		const amountStr = url.searchParams.get('amount');
@@ -31,7 +31,7 @@ export default {
 
 		const amount = Number(amountStr);
 		if (isNaN(amount) || amount < 0) {
-			return errorResponse('amount must be a non-negative number', 400);
+			return errorResponse('amount must be greater than zero', 400);
 		}
 
 		if (from === to) {
@@ -39,7 +39,7 @@ export default {
 		}
 
 		if (from !== 'USD' && to !== 'USD') {
-			return errorResponse('One of from/to must be USD. Only USD conversions supported', 400);
+			return errorResponse('Only USD conversions supported', 400);
 		}
 
 		try {
