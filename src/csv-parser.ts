@@ -1,7 +1,7 @@
 import csvData from '../data/RprtRateXchgCln_20210101_20251231_with_codes.csv';
 import type { ExchangeRate } from './types';
 
-function parseRates(csv: string): Map<string, ExchangeRate> {
+export function parseRates(csv: string): Map<string, ExchangeRate> {
 	const rates = new Map<string, ExchangeRate>();
 	const lines = csv.trim().split('\n');
 
