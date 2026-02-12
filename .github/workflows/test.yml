@@ -44,7 +44,7 @@ jobs:
 
       - name: Smoke test - health check
         run: |
-          STATUS=$(curl -s -o /dev/null -w '%{http_code}' 'https://linkedin-currency-converter.tvs-consult.workers.dev/convert?amount=1&from=USD&to=EUR')
+          STATUS=$(curl -sL -o /dev/null -w '%{http_code}' 'https://linkedin-currency-converter.tvs-consult.workers.dev/convert?amount=1&from=USD&to=EUR')
           if [ "$STATUS" != "200" ]; then
             echo "Health check failed with status $STATUS"
             exit 1
@@ -52,7 +52,7 @@ jobs:
 
       - name: Smoke test - response validation
         run: |
-          RESPONSE=$(curl -s 'https://linkedin-currency-converter.tvs-consult.workers.dev/convert?amount=100&from=USD&to=EUR')
+          RESPONSE=$(curl -sL 'https://linkedin-currency-converter.tvs-consult.workers.dev/convert?amount=100&from=USD&to=EUR')
           echo "$RESPONSE"
           echo "$RESPONSE" | jq -e '.from == "USD"' > /dev/null
           echo "$RESPONSE" | jq -e '.to == "EUR"' > /dev/null
@@ -63,7 +63,7 @@ jobs:
 
       - name: Smoke test - error handling
         run: |
-          STATUS=$(curl -s -o /dev/null -w '%{http_code}' 'https://linkedin-currency-converter.tvs-consult.workers.dev/convert')
+          STATUS=$(curl -sL -o /dev/null -w '%{http_code}' 'https://linkedin-currency-converter.tvs-consult.workers.dev/convert')
           if [ "$STATUS" != "400" ]; then
             echo "Expected 400 for missing params, got $STATUS"
             exit 1
