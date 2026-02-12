@@ -21,6 +21,7 @@ describe('convert', () => {
 			expect(result.from).toBe('USD');
 			expect(result.to).toBe('EUR');
 			expect(result.amount).toBe(100);
+			expect(result.availableCurrencies).toBe(2);
 		});
 
 		it('rounds rate to 6dp', () => {
@@ -39,6 +40,7 @@ describe('convert', () => {
 		it('converts correctly using inverse rate', () => {
 			const result = convert(89, 'EUR', 'USD', rates);
 			expect(result.convertedAmount).toBe(100);
+			expect(result.availableCurrencies).toBe(2);
 		});
 
 		it('rounds inverse rate to 6dp', () => {

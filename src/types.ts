@@ -12,6 +12,7 @@ export interface ConversionResult {
 	convertedAmount: number;
 	rate: number;
 	description: string;
+	availableCurrencies: number;
 }
 
 export interface ErrorResponse {

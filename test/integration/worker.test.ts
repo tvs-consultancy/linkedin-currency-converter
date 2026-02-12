@@ -64,10 +64,11 @@ describe('Worker fetch handler', () => {
 		it('converts USD to foreign', async () => {
 			const res = await SELF.fetch(`${BASE}/convert?amount=100&from=USD&to=EUR`);
 			expect(res.status).toBe(200);
-			const body = await res.json<{ from: string; to: string; convertedAmount: number }>();
+			const body = await res.json<{ from: string; to: string; convertedAmount: number; availableCurrencies: number }>();
 			expect(body.from).toBe('USD');
 			expect(body.to).toBe('EUR');
 			expect(typeof body.convertedAmount).toBe('number');
+			expect(body.availableCurrencies).toBeGreaterThan(0);
 		});
 
 		it('converts foreign to USD', async () => {
