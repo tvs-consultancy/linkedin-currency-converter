@@ -70,7 +70,6 @@ Record Date,Country - Currency Description,Exchange Rate,Effective Date,ISO Curr
 2025-12-31,Hong Kong-Dollar,7.784,2025-12-31,HKD
 2025-12-31,Hungary-Forint,327.22,2025-12-31,HUF
 2025-12-31,Iceland-Krona,125.11,2025-12-31,ISK
-2025-12-31,India-Rupee,89.854,2025-12-31,INR
 2025-12-31,Indonesia-Rupiah,16649.99,2025-12-31,IDR
 2025-12-31,Iran-Rial,42000.0,2025-12-31,IRR
 2025-12-31,Iran-Rial,1068906.0,2026-01-15,IRR
@@ -242,7 +241,6 @@ Record Date,Country - Currency Description,Exchange Rate,Effective Date,ISO Curr
 2025-09-30,Hong Kong-Dollar,7.78,2025-09-30,HKD
 2025-09-30,Hungary-Forint,332.44,2025-09-30,HUF
 2025-09-30,Iceland-Krona,121.04,2025-09-30,ISK
-2025-09-30,India-Rupee,88.796,2025-09-30,INR
 2025-09-30,Indonesia-Rupiah,16636.68,2025-09-30,IDR
 2025-09-30,Iran-Rial,42000.0,2025-09-30,IRR
 2025-09-30,Iraq-Dinar,1309.52,2025-09-30,IQD
@@ -411,7 +409,6 @@ Record Date,Country - Currency Description,Exchange Rate,Effective Date,ISO Curr
 2025-06-30,Hong Kong-Dollar,7.85,2025-06-30,HKD
 2025-06-30,Hungary-Forint,340.76,2025-06-30,HUF
 2025-06-30,Iceland-Krona,121.17,2025-06-30,ISK
-2025-06-30,India-Rupee,85.735,2025-06-30,INR
 2025-06-30,Indonesia-Rupiah,16207.02,2025-06-30,IDR
 2025-06-30,Iran-Rial,42000.0,2025-06-30,IRR
 2025-06-30,Iraq-Dinar,1309.0,2025-06-30,IQD
@@ -596,7 +593,6 @@ Record Date,Country - Currency Description,Exchange Rate,Effective Date,ISO Curr
 2025-03-31,Hong Kong-Dollar,7.779,2025-03-31,HKD
 2025-03-31,Hungary-Forint,371.67,2025-03-31,HUF
 2025-03-31,Iceland-Krona,131.71,2025-03-31,ISK
-2025-03-31,India-Rupee,85.417,2025-03-31,INR
 2025-03-31,Indonesia-Rupiah,16525.94,2025-03-31,IDR
 2025-03-31,Iran-Rial,42000.0,2025-03-31,IRR
 2025-03-31,Iraq-Dinar,1309.0,2025-03-31,IQD
@@ -794,7 +790,6 @@ Record Date,Country - Currency Description,Exchange Rate,Effective Date,ISO Curr
 2024-12-31,Hong Kong-Dollar,7.766,2024-12-31,HKD
 2024-12-31,Hungary-Forint,395.32,2024-12-31,HUF
 2024-12-31,Iceland-Krona,138.19,2024-12-31,ISK
-2024-12-31,India-Rupee,85.577,2024-12-31,INR
 2024-12-31,Indonesia-Rupiah,16067.13,2024-12-31,IDR
 2024-12-31,Iran-Rial,42000.0,2024-12-31,IRR
 2024-12-31,Iraq-Dinar,1309.0,2024-12-31,IQD
@@ -984,7 +979,6 @@ Record Date,Country - Currency Description,Exchange Rate,Effective Date,ISO Curr
 2024-09-30,Hungary-Forint,354.55,2024-09-30,HUF
 2024-09-30,Hungary-Forint,390.34,2024-11-29,HUF
 2024-09-30,Iceland-Krona,134.42,2024-09-30,ISK
-2024-09-30,India-Rupee,83.767,2024-09-30,INR
 2024-09-30,Indonesia-Rupiah,15125.0,2024-09-30,IDR
 2024-09-30,Iran-Rial,42000.0,2024-09-30,IRR
 2024-09-30,Iraq-Dinar,1309.0,2024-09-30,IQD
@@ -1161,7 +1155,6 @@ Record Date,Country - Currency Description,Exchange Rate,Effective Date,ISO Curr
 2024-06-30,Hong Kong-Dollar,7.809,2024-06-30,HKD
 2024-06-30,Hungary-Forint,369.4,2024-06-30,HUF
 2024-06-30,Iceland-Krona,139.03,2024-06-30,ISK
-2024-06-30,India-Rupee,83.356,2024-06-30,INR
 2024-06-30,Indonesia-Rupiah,16333.3,2024-06-30,IDR
 2024-06-30,Iran-Rial,42000.0,2024-06-30,IRR
 2024-06-30,Iraq-Dinar,1309.0,2024-06-30,IQD
@@ -1336,7 +1329,6 @@ Record Date,Country - Currency Description,Exchange Rate,Effective Date,ISO Curr
 2024-03-31,Hong Kong-Dollar,7.826,2024-03-31,HKD
 2024-03-31,Hungary-Forint,364.89,2024-03-31,HUF
 2024-03-31,Iceland-Krona,139.18,2024-03-31,ISK
-2024-03-31,India-Rupee,83.339,2024-03-31,INR
 2024-03-31,Indonesia-Rupiah,15824.16,2024-03-31,IDR
 2024-03-31,Iran-Rial,42000.0,2024-03-31,IRR
 2024-03-31,Iraq-Dinar,1309.0,2024-03-31,IQD
@@ -1509,7 +1501,6 @@ Record Date,Country - Currency Description,Exchange Rate,Effective Date,ISO Curr
 2023-12-31,Hong Kong-Dollar,7.811,2023-12-31,HKD
 2023-12-31,Hungary-Forint,345.78,2023-12-31,HUF
 2023-12-31,Iceland-Krona,136.04,2023-12-31,ISK
-2023-12-31,India-Rupee,83.162,2023-12-31,INR
 2023-12-31,Indonesia-Rupiah,15372.69,2023-12-31,IDR
 2023-12-31,Iran-Rial,42000.0,2023-12-31,IRR
 2023-12-31,Iraq-Dinar,1308.0,2023-12-31,IQD
@@ -1684,7 +1675,6 @@ Record Date,Country - Currency Description,Exchange Rate,Effective Date,ISO Curr
 2023-09-30,Hong Kong-Dollar,7.831,2023-09-30,HKD
 2023-09-30,Hungary-Forint,367.93,2023-09-30,HUF
 2023-09-30,Iceland-Krona,136.6,2023-09-30,ISK
-2023-09-30,India-Rupee,83.071,2023-09-30,INR
 2023-09-30,Indonesia-Rupiah,15471.6,2023-09-30,IDR
 2023-09-30,Iran-Rial,42000.0,2023-09-30,IRR
 2023-09-30,Iraq-Dinar,1308.6,2023-09-30,IQD
@@ -1861,7 +1851,6 @@ Record Date,Country - Currency Description,Exchange Rate,Effective Date,ISO Curr
 2023-06-30,Hong Kong-Dollar,7.837,2023-06-30,HKD
 2023-06-30,Hungary-Forint,342.15,2023-06-30,HUF
 2023-06-30,Iceland-Krona,136.67,2023-06-30,ISK
-2023-06-30,India-Rupee,82.086,2023-06-30,INR
 2023-06-30,Indonesia-Rupiah,14957.53,2023-06-30,IDR
 2023-06-30,Iran-Rial,42000.0,2023-06-30,IRR
 2023-06-30,Iraq-Dinar,1309.0,2023-06-30,IQD
@@ -2045,7 +2034,6 @@ Record Date,Country - Currency Description,Exchange Rate,Effective Date,ISO Curr
 2023-03-31,Hong Kong-Dollar,7.85,2023-03-31,HKD
 2023-03-31,Hungary-Forint,348.83,2023-03-31,HUF
 2023-03-31,Iceland-Krona,136.05,2023-03-31,ISK
-2023-03-31,India-Rupee,82.19,2023-03-31,INR
 2023-03-31,Indonesia-Rupiah,14962.51,2023-03-31,IDR
 2023-03-31,Iran-Rial,42000.0,2023-03-31,IRR
 2023-03-31,Iraq-Dinar,1311.0,2023-03-31,IQD
@@ -2227,7 +2215,6 @@ Record Date,Country - Currency Description,Exchange Rate,Effective Date,ISO Curr
 2022-12-31,Hong Kong-Dollar,7.797,2022-12-31,HKD
 2022-12-31,Hungary-Forint,374.63,2022-12-31,HUF
 2022-12-31,Iceland-Krona,141.61,2022-12-31,ISK
-2022-12-31,India-Rupee,82.599,2022-12-31,INR
 2022-12-31,Indonesia-Rupiah,15528.42,2022-12-31,IDR
 2022-12-31,Iran-Rial,42000.0,2022-12-31,IRR
 2022-12-31,Iraq-Dinar,1458.53,2022-12-31,IQD
@@ -2409,7 +2396,6 @@ Record Date,Country - Currency Description,Exchange Rate,Effective Date,ISO Curr
 2022-09-30,Hungary-Forint,432.45,2022-09-30,HUF
 2022-09-30,Hungary-Forint,382.18,2022-12-15,HUF
 2022-09-30,Iceland-Krona,144.39,2022-09-30,ISK
-2022-09-30,India-Rupee,81.476,2022-09-30,INR
 2022-09-30,Indonesia-Rupiah,15209.78,2022-09-30,IDR
 2022-09-30,Iran-Rial,42000.0,2022-09-30,IRR
 2022-09-30,Iraq-Dinar,1458.54,2022-09-30,IQD
@@ -2590,7 +2576,6 @@ Record Date,Country - Currency Description,Exchange Rate,Effective Date,ISO Curr
 2022-06-30,Hong Kong-Dollar,7.846,2022-06-30,HKD
 2022-06-30,Hungary-Forint,381.6,2022-06-30,HUF
 2022-06-30,Iceland-Krona,133.46,2022-06-30,ISK
-2022-06-30,India-Rupee,79.01,2022-06-30,INR
 2022-06-30,Indonesia-Rupiah,14990.667,2022-06-30,IDR
 2022-06-30,Iran-Rial,42000.0,2022-06-30,IRR
 2022-06-30,Iraq-Dinar,1458.52,2022-06-30,IQD
@@ -2768,7 +2753,6 @@ Record Date,Country - Currency Description,Exchange Rate,Effective Date,ISO Curr
 2022-03-31,Hungary-Forint,332.84,2022-03-31,HUF
 2022-03-31,Hungary-Forint,370.05,2022-05-13,HUF
 2022-03-31,Iceland-Krona,127.75,2022-03-31,ISK
-2022-03-31,India-Rupee,75.724,2022-03-31,INR
 2022-03-31,Indonesia-Rupiah,14343.64,2022-03-31,IDR
 2022-03-31,Iran-Rial,42000.0,2022-03-31,IRR
 2022-03-31,Iraq-Dinar,1458.5,2022-03-31,IQD
@@ -2968,7 +2952,6 @@ Record Date,Country - Currency Description,Exchange Rate,Effective Date,ISO Curr
 2021-12-31,Hong Kong-Dollar,7.799,2021-12-31,HKD
 2021-12-31,Hungary-Forint,326.32,2021-12-31,HUF
 2021-12-31,Iceland-Krona,129.98,2021-12-31,ISK
-2021-12-31,India-Rupee,74.343,2021-12-31,INR
 2021-12-31,Indonesia-Rupiah,14195.28,2021-12-31,IDR
 2021-12-31,Iran-Rial,42000.0,2021-12-31,IRR
 2021-12-31,Iraq-Dinar,1458.54,2021-12-31,IQD
@@ -3171,7 +3154,6 @@ Record Date,Country - Currency Description,Exchange Rate,Effective Date,ISO Curr
 2021-09-30,Hong Kong-Dollar,7.788,2021-09-30,HKD
 2021-09-30,Hungary-Forint,311.49,2021-09-30,HUF
 2021-09-30,Iceland-Krona,130.24,2021-09-30,ISK
-2021-09-30,India-Rupee,74.289,2021-09-30,INR
 2021-09-30,Indonesia-Rupiah,14313.0,2021-09-30,IDR
 2021-09-30,Iran-Rial,42000.0,2021-09-30,IRR
 2021-09-30,Iraq-Dinar,1459.0,2021-09-30,IQD
@@ -3359,7 +3341,6 @@ Record Date,Country - Currency Description,Exchange Rate,Effective Date,ISO Curr
 2021-06-30,Hong Kong-Dollar,7.766,2021-06-30,HKD
 2021-06-30,Hungary-Forint,295.8,2021-06-30,HUF
 2021-06-30,Iceland-Krona,123.16,2021-06-30,ISK
-2021-06-30,India-Rupee,74.317,2021-06-30,INR
 2021-06-30,Indonesia-Rupiah,14537.0,2021-06-30,IDR
 2021-06-30,Iran-Rial,42000.0,2021-06-30,IRR
 2021-06-30,Iraq-Dinar,1458.0,2021-06-30,IQD
@@ -3535,7 +3516,6 @@ Record Date,Country - Currency Description,Exchange Rate,Effective Date,ISO Curr
 2021-03-31,Hong Kong-Dollar,7.774,2021-03-31,HKD
 2021-03-31,Hungary-Forint,309.71,2021-03-31,HUF
 2021-03-31,Iceland-Krona,126.1,2021-03-31,ISK
-2021-03-31,India-Rupee,73.154,2021-03-31,INR
 2021-03-31,Indonesia-Rupiah,14542.0,2021-03-31,IDR
 2021-03-31,Iran-Rial,42000.0,2021-03-31,IRR
 2021-03-31,Iraq-Dinar,1458.0,2021-03-31,IQD
