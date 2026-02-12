@@ -17,6 +17,7 @@ export function convert(
 			convertedAmount,
 			rate: Math.round(target.rate * 1000000) / 1000000,
 			description: target.description,
+			availableCurrencies: rates.size,
 		};
 	}
 
@@ -32,5 +33,6 @@ export function convert(
 		convertedAmount,
 		rate: Math.round(rate * 1000000) / 1000000,
 		description: source.description,
+		availableCurrencies: rates.size,
 	};
 }

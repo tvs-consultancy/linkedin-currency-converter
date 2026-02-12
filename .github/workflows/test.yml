@@ -60,6 +60,7 @@ jobs:
           echo "$RESPONSE" | jq -e '.convertedAmount > 0' > /dev/null
           echo "$RESPONSE" | jq -e '.rate > 0' > /dev/null
           echo "$RESPONSE" | jq -e '.description' > /dev/null
+          echo "$RESPONSE" | jq -e '.availableCurrencies > 0' > /dev/null
 
       - name: Smoke test - error handling
         run: |
