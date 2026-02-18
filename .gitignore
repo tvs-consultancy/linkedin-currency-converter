@@ -5,3 +5,5 @@ packages/*/.wrangler/
 .claude/
 .mcp.json
 nul
+.next/
+*.tsbuildinfo
