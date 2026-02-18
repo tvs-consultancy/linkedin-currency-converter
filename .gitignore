@@ -1,6 +1,7 @@
 node_modules/
 dist/
 .wrangler/
+packages/*/.wrangler/
 .claude/
 .mcp.json
 nul
