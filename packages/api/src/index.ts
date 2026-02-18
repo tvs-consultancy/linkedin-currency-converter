@@ -58,7 +58,7 @@ export default {
 			}
 
 			const amount = Number(amountStr);
-			if (isNaN(amount) || amount < 0) {
+			if (isNaN(amount) || amount <= 0) {
 				return errorResponse('amount must be greater than zero', 400);
 			}
 

@@ -38,6 +38,11 @@ describe('Worker fetch handler', () => {
 			expect(res.status).toBe(400);
 		});
 
+		it('returns 400 for zero amount', async () => {
+			const res = await SELF.fetch(`${BASE}/convert?amount=0&from=USD&to=EUR`);
+			expect(res.status).toBe(400);
+		});
+
 		it('returns 400 for same from/to', async () => {
 			const res = await SELF.fetch(`${BASE}/convert?amount=100&from=USD&to=USD`);
 			expect(res.status).toBe(400);
