@@ -18,3 +18,7 @@ export interface ConversionResult {
 export interface ErrorResponse {
 	error: string;
 }
+
+export interface CurrenciesResponse {
+	currencies: string[];
+}
