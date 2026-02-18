@@ -99,5 +99,50 @@ describe('Worker fetch handler', () => {
 			const res = await SELF.fetch(`${BASE}/convert?amount=100&from=USD&to=EUR`);
 			expect(res.headers.get('Content-Type')).toBe('application/json');
 		});
+
+		it('returns CORS headers on /convert', async () => {
+			const res = await SELF.fetch(`${BASE}/convert?amount=100&from=USD&to=EUR`);
+			expect(res.headers.get('Access-Control-Allow-Origin')).toBe('*');
+		});
+	});
+
+	describe('/currencies endpoint', () => {
+		it('returns 200 with currencies array', async () => {
+			const res = await SELF.fetch(`${BASE}/currencies`);
+			expect(res.status).toBe(200);
+			const body = await res.json<{ currencies: string[] }>();
+			expect(Array.isArray(body.currencies)).toBe(true);
+			expect(body.currencies.length).toBeGreaterThan(0);
+		});
+
+		it('returns currency codes as strings', async () => {
+			const res = await SELF.fetch(`${BASE}/currencies`);
+			const body = await res.json<{ currencies: string[] }>();
+			body.currencies.forEach(code => expect(typeof code).toBe('string'));
+		});
+
+		it('includes known currencies', async () => {
+			const res = await SELF.fetch(`${BASE}/currencies`);
+			const body = await res.json<{ currencies: string[] }>();
+			expect(body.currencies).toContain('EUR');
+			expect(body.currencies).toContain('GBP');
+		});
+
+		it('returns currencies sorted alphabetically', async () => {
+			const res = await SELF.fetch(`${BASE}/currencies`);
+			const body = await res.json<{ currencies: string[] }>();
+			const sorted = [...body.currencies].sort();
+			expect(body.currencies).toEqual(sorted);
+		});
+
+		it('returns Content-Type application/json', async () => {
+			const res = await SELF.fetch(`${BASE}/currencies`);
+			expect(res.headers.get('Content-Type')).toBe('application/json');
+		});
+
+		it('returns CORS headers', async () => {
+			const res = await SELF.fetch(`${BASE}/currencies`);
+			expect(res.headers.get('Access-Control-Allow-Origin')).toBe('*');
+		});
 	});
 });
