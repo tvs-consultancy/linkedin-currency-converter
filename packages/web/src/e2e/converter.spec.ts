@@ -40,7 +40,7 @@ test('full conversion flow — enters amount, clicks Convert, shows result', asy
 
   // Wait for currencies to load (From defaults to USD)
   await expect(page.getByLabel('From')).toHaveValue('USD');
-  await expect(page.getByLabel('To')).toHaveValue('EUR');
+  await expect(page.getByLabel('To', { exact: true })).toHaveValue('EUR');
 
   await page.getByLabel('Amount').fill('100');
   await page.getByRole('button', { name: 'Convert' }).click();
@@ -62,7 +62,7 @@ test('Convert button is disabled when From equals To', async ({ page }) => {
   await expect(page.getByLabel('From')).toHaveValue('USD');
 
   await page.getByLabel('Amount').fill('100');
-  await page.getByLabel('To').selectOption('USD');
+  await page.getByLabel('To', { exact: true }).selectOption('USD');
 
   await expect(page.getByRole('button', { name: 'Convert' })).toBeDisabled();
   await expect(page.getByText('From and To currencies must be different.')).toBeVisible();
