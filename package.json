@@ -2,18 +2,11 @@
   "name": "linkedin-currency-converter",
   "version": "0.0.0",
   "private": true,
+  "workspaces": ["packages/*"],
   "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy",
-    "cf-typegen": "wrangler types",
-    "test": "vitest run",
-    "test:unit": "vitest run test/unit",
-    "test:integration": "vitest run test/integration"
-  },
-  "devDependencies": {
-    "@cloudflare/vitest-pool-workers": "^0.12.11",
-    "typescript": "^5.7.0",
-    "vitest": "^3.2.4",
-    "wrangler": "^4.0.0"
+    "dev:api": "npm run dev -w @repo/api",
+    "test": "npm run test -w @repo/api",
+    "test:unit": "npm run test:unit -w @repo/api",
+    "test:integration": "npm run test:integration -w @repo/api"
   }
 }
