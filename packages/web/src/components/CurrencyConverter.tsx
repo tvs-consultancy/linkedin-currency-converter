@@ -56,19 +56,19 @@ export default function CurrencyConverter() {
 
   return (
     <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-6 md:p-8">
-      <h1 className="text-2xl font-bold text-gray-900 mb-1">Currency Converter</h1>
+      <h1 className="text-2xl font-bold text-gray-900 mb-1">Conversor de Divisas</h1>
       <p className="text-sm text-gray-500 mb-6">
-        Convert between USD and 150+ world currencies
+        Convierte entre USD y más de 150 divisas del mundo
       </p>
 
       {currenciesError && (
         <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg flex items-center justify-between">
-          <span className="text-sm text-red-700">Failed to load currencies.</span>
+          <span className="text-sm text-red-700">Error al cargar las divisas.</span>
           <button
             onClick={loadCurrencies}
             className="text-sm font-medium text-red-700 underline ml-3 hover:text-red-900"
           >
-            Retry
+            Reintentar
           </button>
         </div>
       )}
@@ -76,7 +76,7 @@ export default function CurrencyConverter() {
       <div className="space-y-4">
         <div>
           <label htmlFor="amount" className="block text-sm font-medium text-gray-700 mb-1">
-            Amount
+            Cantidad
           </label>
           <input
             id="amount"
@@ -94,7 +94,7 @@ export default function CurrencyConverter() {
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label htmlFor="from" className="block text-sm font-medium text-gray-700 mb-1">
-              From
+              De
             </label>
             <select
               id="from"
@@ -103,7 +103,7 @@ export default function CurrencyConverter() {
               disabled={loading || currencies.length === 0}
               className="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-50 disabled:text-gray-500"
             >
-              <option value="">Select...</option>
+              <option value="">Seleccionar...</option>
               {currencies.map((c) => (
                 <option key={c} value={c}>
                   {c}
@@ -114,7 +114,7 @@ export default function CurrencyConverter() {
 
           <div>
             <label htmlFor="to" className="block text-sm font-medium text-gray-700 mb-1">
-              To
+              A
             </label>
             <select
               id="to"
@@ -123,7 +123,7 @@ export default function CurrencyConverter() {
               disabled={loading || currencies.length === 0}
               className="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-50 disabled:text-gray-500"
             >
-              <option value="">Select...</option>
+              <option value="">Seleccionar...</option>
               {currencies.map((c) => (
                 <option key={c} value={c}>
                   {c}
@@ -134,7 +134,7 @@ export default function CurrencyConverter() {
         </div>
 
         {from !== '' && to !== '' && from === to && (
-          <p className="text-sm text-red-600">From and To currencies must be different.</p>
+          <p className="text-sm text-red-600">Las divisas de origen y destino deben ser diferentes.</p>
         )}
 
         <button
@@ -142,7 +142,7 @@ export default function CurrencyConverter() {
           disabled={!isValid || loading}
           className="w-full py-2.5 px-4 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
         >
-          {loading ? 'Converting…' : 'Convert'}
+          {loading ? 'Convirtiendo…' : 'Convertir'}
         </button>
       </div>
 
