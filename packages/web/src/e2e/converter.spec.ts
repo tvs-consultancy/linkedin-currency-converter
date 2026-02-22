@@ -39,7 +39,7 @@ test('full conversion flow — enters amount, clicks Convertir, shows result', a
   await page.goto('/');
 
   // Wait for currencies to load (De defaults to USD)
-  await expect(page.getByLabel('De')).toHaveValue('USD');
+  await expect(page.getByLabel('De', { exact: true })).toHaveValue('USD');
   await expect(page.getByLabel('A', { exact: true })).toHaveValue('EUR');
 
   await page.getByLabel('Cantidad').fill('100');
@@ -52,14 +52,14 @@ test('full conversion flow — enters amount, clicks Convertir, shows result', a
 
 test('Convertir button is disabled when no amount is entered', async ({ page }) => {
   await page.goto('/');
-  await expect(page.getByLabel('De')).toHaveValue('USD');
+  await expect(page.getByLabel('De', { exact: true })).toHaveValue('USD');
 
   await expect(page.getByRole('button', { name: 'Convertir' })).toBeDisabled();
 });
 
 test('Convertir button is disabled when De equals A', async ({ page }) => {
   await page.goto('/');
-  await expect(page.getByLabel('De')).toHaveValue('USD');
+  await expect(page.getByLabel('De', { exact: true })).toHaveValue('USD');
 
   await page.getByLabel('Cantidad').fill('100');
   await page.getByLabel('A', { exact: true }).selectOption('USD');
@@ -79,7 +79,7 @@ test('shows API error message when conversion fails', async ({ page }) => {
   );
 
   await page.goto('/');
-  await expect(page.getByLabel('De')).toHaveValue('USD');
+  await expect(page.getByLabel('De', { exact: true })).toHaveValue('USD');
 
   await page.getByLabel('Cantidad').fill('100');
   await page.getByRole('button', { name: 'Convertir' }).click();
