@@ -35,37 +35,37 @@ test.beforeEach(async ({ page }) => {
   );
 });
 
-test('full conversion flow — enters amount, clicks Convert, shows result', async ({ page }) => {
+test('full conversion flow — enters amount, clicks Convertir, shows result', async ({ page }) => {
   await page.goto('/');
 
-  // Wait for currencies to load (From defaults to USD)
-  await expect(page.getByLabel('From')).toHaveValue('USD');
-  await expect(page.getByLabel('To', { exact: true })).toHaveValue('EUR');
+  // Wait for currencies to load (De defaults to USD)
+  await expect(page.getByLabel('De', { exact: true })).toHaveValue('USD');
+  await expect(page.getByLabel('A', { exact: true })).toHaveValue('EUR');
 
-  await page.getByLabel('Amount').fill('100');
-  await page.getByRole('button', { name: 'Convert' }).click();
+  await page.getByLabel('Cantidad').fill('100');
+  await page.getByRole('button', { name: 'Convertir' }).click();
 
   await expect(page.getByText(/92\.50/)).toBeVisible();
   await expect(page.getByText('1 USD = 0.925 EUR')).toBeVisible();
   await expect(page.getByText('Euro')).toBeVisible();
 });
 
-test('Convert button is disabled when no amount is entered', async ({ page }) => {
+test('Convertir button is disabled when no amount is entered', async ({ page }) => {
   await page.goto('/');
-  await expect(page.getByLabel('From')).toHaveValue('USD');
+  await expect(page.getByLabel('De', { exact: true })).toHaveValue('USD');
 
-  await expect(page.getByRole('button', { name: 'Convert' })).toBeDisabled();
+  await expect(page.getByRole('button', { name: 'Convertir' })).toBeDisabled();
 });
 
-test('Convert button is disabled when From equals To', async ({ page }) => {
+test('Convertir button is disabled when De equals A', async ({ page }) => {
   await page.goto('/');
-  await expect(page.getByLabel('From')).toHaveValue('USD');
+  await expect(page.getByLabel('De', { exact: true })).toHaveValue('USD');
 
-  await page.getByLabel('Amount').fill('100');
-  await page.getByLabel('To', { exact: true }).selectOption('USD');
+  await page.getByLabel('Cantidad').fill('100');
+  await page.getByLabel('A', { exact: true }).selectOption('USD');
 
-  await expect(page.getByRole('button', { name: 'Convert' })).toBeDisabled();
-  await expect(page.getByText('From and To currencies must be different.')).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Convertir' })).toBeDisabled();
+  await expect(page.getByText('Las divisas de origen y destino deben ser diferentes.')).toBeVisible();
 });
 
 test('shows API error message when conversion fails', async ({ page }) => {
@@ -79,10 +79,10 @@ test('shows API error message when conversion fails', async ({ page }) => {
   );
 
   await page.goto('/');
-  await expect(page.getByLabel('From')).toHaveValue('USD');
+  await expect(page.getByLabel('De', { exact: true })).toHaveValue('USD');
 
-  await page.getByLabel('Amount').fill('100');
-  await page.getByRole('button', { name: 'Convert' }).click();
+  await page.getByLabel('Cantidad').fill('100');
+  await page.getByRole('button', { name: 'Convertir' }).click();
 
   await expect(page.getByText('Only USD conversions supported')).toBeVisible();
 });

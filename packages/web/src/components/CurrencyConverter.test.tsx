@@ -28,7 +28,7 @@ const MOCK_RESULT: ConversionResult = {
 /** Wait until both From/To selects are populated (currencies loaded). */
 async function waitForCurrencies() {
   await waitFor(() => {
-    expect(screen.getByLabelText('From')).toHaveValue('USD');
+    expect(screen.getByLabelText('De')).toHaveValue('USD');
   });
 }
 
@@ -38,14 +38,14 @@ describe('CurrencyConverter', () => {
     mockFetchCurrencies.mockResolvedValue({ currencies: CURRENCIES });
   });
 
-  it('renders amount input, from/to dropdowns and Convert button', async () => {
+  it('renders amount input, from/to dropdowns and Convertir button', async () => {
     render(<CurrencyConverter />);
     await waitForCurrencies();
 
-    expect(screen.getByLabelText('Amount')).toBeInTheDocument();
-    expect(screen.getByLabelText('From')).toBeInTheDocument();
-    expect(screen.getByLabelText('To')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Convert' })).toBeInTheDocument();
+    expect(screen.getByLabelText('Cantidad')).toBeInTheDocument();
+    expect(screen.getByLabelText('De')).toBeInTheDocument();
+    expect(screen.getByLabelText('A')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Convertir' })).toBeInTheDocument();
   });
 
   it('fetches currencies on mount and populates dropdowns', async () => {
@@ -58,34 +58,34 @@ describe('CurrencyConverter', () => {
     expect(screen.getAllByRole('option', { name: 'USD' })).toHaveLength(2);
   });
 
-  it('Convert button is disabled when amount is empty', async () => {
+  it('Convertir button is disabled when amount is empty', async () => {
     render(<CurrencyConverter />);
     await waitForCurrencies();
 
-    expect(screen.getByRole('button', { name: 'Convert' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Convertir' })).toBeDisabled();
   });
 
-  it('Convert button is disabled when amount is zero', async () => {
+  it('Convertir button is disabled when amount is zero', async () => {
     const user = userEvent.setup();
     render(<CurrencyConverter />);
     await waitForCurrencies();
 
-    await user.type(screen.getByLabelText('Amount'), '0');
+    await user.type(screen.getByLabelText('Cantidad'), '0');
 
-    expect(screen.getByRole('button', { name: 'Convert' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Convertir' })).toBeDisabled();
   });
 
-  it('Convert button is disabled when from equals to, and shows validation message', async () => {
+  it('Convertir button is disabled when from equals to, and shows validation message', async () => {
     const user = userEvent.setup();
     render(<CurrencyConverter />);
     await waitForCurrencies();
 
-    await user.type(screen.getByLabelText('Amount'), '100');
-    await user.selectOptions(screen.getByLabelText('To'), 'USD');
+    await user.type(screen.getByLabelText('Cantidad'), '100');
+    await user.selectOptions(screen.getByLabelText('A'), 'USD');
 
-    expect(screen.getByRole('button', { name: 'Convert' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Convertir' })).toBeDisabled();
     expect(
-      screen.getByText('From and To currencies must be different.'),
+      screen.getByText('Las divisas de origen y destino deben ser diferentes.'),
     ).toBeInTheDocument();
   });
 
@@ -99,20 +99,20 @@ describe('CurrencyConverter', () => {
     render(<CurrencyConverter />);
     await waitForCurrencies();
 
-    await user.type(screen.getByLabelText('Amount'), '100');
-    await user.click(screen.getByRole('button', { name: 'Convert' }));
+    await user.type(screen.getByLabelText('Cantidad'), '100');
+    await user.click(screen.getByRole('button', { name: 'Convertir' }));
 
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: 'Converting…' })).toBeDisabled();
+      expect(screen.getByRole('button', { name: 'Convirtiendo…' })).toBeDisabled();
     });
-    expect(screen.getByLabelText('Amount')).toBeDisabled();
-    expect(screen.getByLabelText('From')).toBeDisabled();
-    expect(screen.getByLabelText('To')).toBeDisabled();
+    expect(screen.getByLabelText('Cantidad')).toBeDisabled();
+    expect(screen.getByLabelText('De')).toBeDisabled();
+    expect(screen.getByLabelText('A')).toBeDisabled();
 
     // Resolve to clean up pending promise
     resolveFn(MOCK_RESULT);
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: 'Convert' })).not.toBeDisabled();
+      expect(screen.getByRole('button', { name: 'Convertir' })).not.toBeDisabled();
     });
   });
 
@@ -123,8 +123,8 @@ describe('CurrencyConverter', () => {
     render(<CurrencyConverter />);
     await waitForCurrencies();
 
-    await user.type(screen.getByLabelText('Amount'), '100');
-    await user.click(screen.getByRole('button', { name: 'Convert' }));
+    await user.type(screen.getByLabelText('Cantidad'), '100');
+    await user.click(screen.getByRole('button', { name: 'Convertir' }));
 
     await waitFor(() => {
       expect(screen.getByText(/92\.50/)).toBeInTheDocument();
@@ -140,8 +140,8 @@ describe('CurrencyConverter', () => {
     render(<CurrencyConverter />);
     await waitForCurrencies();
 
-    await user.type(screen.getByLabelText('Amount'), '100');
-    await user.click(screen.getByRole('button', { name: 'Convert' }));
+    await user.type(screen.getByLabelText('Cantidad'), '100');
+    await user.click(screen.getByRole('button', { name: 'Convertir' }));
 
     await waitFor(() => {
       expect(screen.getByText('Only USD conversions supported')).toBeInTheDocument();
@@ -156,49 +156,49 @@ describe('CurrencyConverter', () => {
     await waitForCurrencies();
 
     // First conversion
-    await user.type(screen.getByLabelText('Amount'), '100');
-    await user.click(screen.getByRole('button', { name: 'Convert' }));
+    await user.type(screen.getByLabelText('Cantidad'), '100');
+    await user.click(screen.getByRole('button', { name: 'Convertir' }));
     await waitFor(() => expect(screen.getByText(/92\.50/)).toBeInTheDocument());
 
     // Second conversion — previous result should be replaced
     const newResult = { ...MOCK_RESULT, convertedAmount: 185, to: 'GBP' };
     mockConvertCurrency.mockResolvedValue(newResult);
 
-    await user.clear(screen.getByLabelText('Amount'));
-    await user.type(screen.getByLabelText('Amount'), '200');
-    await user.selectOptions(screen.getByLabelText('To'), 'GBP');
-    await user.click(screen.getByRole('button', { name: 'Convert' }));
+    await user.clear(screen.getByLabelText('Cantidad'));
+    await user.type(screen.getByLabelText('Cantidad'), '200');
+    await user.selectOptions(screen.getByLabelText('A'), 'GBP');
+    await user.click(screen.getByRole('button', { name: 'Convertir' }));
 
     await waitFor(() => expect(screen.getByText(/185\.00/)).toBeInTheDocument());
     expect(screen.queryByText(/92\.50/)).not.toBeInTheDocument();
   });
 
-  it('shows currencies fetch error with a Retry button', async () => {
-    mockFetchCurrencies.mockRejectedValue(new Error('Unable to connect'));
+  it('shows currencies fetch error with a Reintentar button', async () => {
+    mockFetchCurrencies.mockRejectedValue(new Error('No se pudo conectar'));
 
     render(<CurrencyConverter />);
 
     await waitFor(() => {
-      expect(screen.getByText('Failed to load currencies.')).toBeInTheDocument();
+      expect(screen.getByText('Error al cargar las divisas.')).toBeInTheDocument();
     });
-    expect(screen.getByRole('button', { name: 'Retry' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Reintentar' })).toBeInTheDocument();
   });
 
-  it('Retry button re-fetches currencies and clears the error', async () => {
+  it('Reintentar button re-fetches currencies and clears the error', async () => {
     const user = userEvent.setup();
     mockFetchCurrencies
-      .mockRejectedValueOnce(new Error('Unable to connect'))
+      .mockRejectedValueOnce(new Error('No se pudo conectar'))
       .mockResolvedValue({ currencies: CURRENCIES });
 
     render(<CurrencyConverter />);
     await waitFor(() =>
-      expect(screen.getByText('Failed to load currencies.')).toBeInTheDocument(),
+      expect(screen.getByText('Error al cargar las divisas.')).toBeInTheDocument(),
     );
 
-    await user.click(screen.getByRole('button', { name: 'Retry' }));
+    await user.click(screen.getByRole('button', { name: 'Reintentar' }));
 
     await waitFor(() => {
-      expect(screen.queryByText('Failed to load currencies.')).not.toBeInTheDocument();
+      expect(screen.queryByText('Error al cargar las divisas.')).not.toBeInTheDocument();
     });
     expect(screen.getAllByRole('option', { name: 'EUR' })).toHaveLength(2);
   });

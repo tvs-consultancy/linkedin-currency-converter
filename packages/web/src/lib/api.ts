@@ -4,10 +4,10 @@ const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8787';
 
 async function handleResponse<T>(response: Response): Promise<T> {
   if (response.status === 404) {
-    throw new Error('Service not found. Please refresh the page.');
+    throw new Error('Servicio no encontrado. Por favor, actualiza la página.');
   }
   if (response.status >= 500) {
-    throw new Error('Something went wrong. Please try again later.');
+    throw new Error('Algo salió mal. Por favor, inténtalo de nuevo más tarde.');
   }
   if (!response.ok) {
     const data = (await response.json()) as { error: string };
@@ -21,7 +21,7 @@ export async function fetchCurrencies(): Promise<CurrenciesResponse> {
   try {
     response = await fetch(`${API_BASE}/currencies`);
   } catch {
-    throw new Error('Unable to connect. Please try again.');
+    throw new Error('No se pudo conectar. Por favor, inténtalo de nuevo.');
   }
   return handleResponse<CurrenciesResponse>(response);
 }
@@ -36,7 +36,7 @@ export async function convertCurrency(
   try {
     response = await fetch(`${API_BASE}/convert?${params}`);
   } catch {
-    throw new Error('Unable to connect. Please try again.');
+    throw new Error('No se pudo conectar. Por favor, inténtalo de nuevo.');
   }
   return handleResponse<ConversionResult>(response);
 }

@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Currency Converter',
-  description: 'Convert between USD and world currencies',
+  title: 'Conversor de Divisas',
+  description: 'Convierte entre USD y divisas del mundo',
 };
 
 export default function RootLayout({
@@ -12,7 +12,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body>{children}</body>
     </html>
   );
