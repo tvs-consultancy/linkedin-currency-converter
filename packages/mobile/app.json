@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "Currency Converter",
+    "slug": "linkedin-currency-converter",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "platforms": ["ios", "android"],
+    "newArchEnabled": true
+  }
+}
