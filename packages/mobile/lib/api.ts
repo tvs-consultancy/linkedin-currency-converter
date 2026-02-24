@@ -1,4 +1,4 @@
-import type { ConversionResult, CurrenciesResponse } from '@repo/api/src/types';
+import type { ConversionResult, CurrenciesResponse } from './types';
 
 const API_BASE = process.env.EXPO_PUBLIC_API_URL ?? 'http://localhost:8787';
 

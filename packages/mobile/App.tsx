@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { StatusBar } from 'expo-status-bar';
-import type { ConversionResult } from '@repo/api/src/types';
+import type { ConversionResult } from './lib/types';
 import { convertCurrency, fetchCurrencies } from './lib/api';
 
 export default function App() {
@@ -91,7 +91,7 @@ export default function App() {
       <StatusBar style="dark" />
 
       <View style={styles.card}>
-        <Text style={styles.title}>Conversor de Divisas</Text>
+        <Text style={styles.title} testID="app-title">Conversor de Divisas</Text>
 
         {/* Currency load error */}
         {currenciesError && (
@@ -111,6 +111,7 @@ export default function App() {
         {/* Amount input */}
         <Text style={styles.label}>Cantidad</Text>
         <TextInput
+          testID="amount-input"
           style={styles.input}
           value={amount}
           onChangeText={(v) => {
@@ -126,6 +127,7 @@ export default function App() {
         <Text style={styles.label}>De</Text>
         <View style={styles.pickerWrapper}>
           <Picker
+            testID="from-picker"
             selectedValue={from}
             onValueChange={(value) => {
               setFrom(value);
@@ -142,6 +144,7 @@ export default function App() {
         <Text style={styles.label}>A</Text>
         <View style={styles.pickerWrapper}>
           <Picker
+            testID="to-picker"
             selectedValue={to}
             onValueChange={(value) => {
               setTo(value);
@@ -166,6 +169,7 @@ export default function App() {
 
         {/* Convert button */}
         <Pressable
+          testID="convert-button"
           style={[styles.button, (!isValid() || converting) && styles.buttonDisabled]}
           onPress={handleConvert}
           disabled={!isValid() || converting}
@@ -178,13 +182,13 @@ export default function App() {
         </Pressable>
 
         {/* Error */}
-        {error && <Text style={styles.errorText}>{error}</Text>}
+        {error && <Text testID="error-text" style={styles.errorText}>{error}</Text>}
 
         {/* Result */}
         {result && (
-          <View style={styles.result}>
-            <Text style={styles.resultAmount}>{formatResult(result)}</Text>
-            <Text style={styles.resultRate}>
+          <View testID="result-container" style={styles.result}>
+            <Text testID="result-amount" style={styles.resultAmount}>{formatResult(result)}</Text>
+            <Text testID="result-rate" style={styles.resultRate}>
               1 {result.from} = {result.rate.toFixed(6)} {result.to}
             </Text>
             <Text style={styles.resultDescription}>{result.description}</Text>

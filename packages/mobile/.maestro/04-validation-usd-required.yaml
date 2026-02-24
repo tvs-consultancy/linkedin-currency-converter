@@ -1,0 +1,24 @@
+appId: host.exp.Exponent
+---
+# Flow: Validate USD-required hint when neither currency is USD
+- openLink: exp://127.0.0.1:8081
+- assertVisible:
+    id: "app-title"
+
+# Enter amount
+- tapOn:
+    id: "amount-input"
+- inputText: "100"
+- hideKeyboard
+
+# Select non-USD currencies in both pickers
+- tapOn:
+    id: "from-picker"
+- tapOn: "EUR"
+
+- tapOn:
+    id: "to-picker"
+- tapOn: "GBP"
+
+# The USD constraint hint should appear
+- assertVisible: "Una de las monedas debe ser USD."

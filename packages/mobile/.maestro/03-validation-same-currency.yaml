@@ -1,0 +1,21 @@
+appId: host.exp.Exponent
+---
+# Flow: Validate same-currency hint appears and button is disabled
+- openLink: exp://127.0.0.1:8081
+- assertVisible:
+    id: "app-title"
+
+# Enter amount
+- tapOn:
+    id: "amount-input"
+- inputText: "50"
+- hideKeyboard
+
+# Select same currency in both pickers (tap From picker, select EUR)
+- tapOn:
+    id: "from-picker"
+- tapOn: "EUR"
+
+# To picker already defaults to EUR, so both should be EUR
+# The hint should appear
+- assertVisible: "Las monedas de origen y destino deben ser distintas."

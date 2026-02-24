@@ -1,0 +1,24 @@
+appId: host.exp.Exponent
+---
+# Flow: Convert 100 USD to EUR successfully
+- openLink: exp://127.0.0.1:8081
+- assertVisible:
+    id: "app-title"
+
+# Enter amount
+- tapOn:
+    id: "amount-input"
+- inputText: "100"
+- hideKeyboard
+
+# Default pickers should be USD → EUR, tap convert
+- tapOn:
+    id: "convert-button"
+
+# Verify result appears
+- assertVisible:
+    id: "result-container"
+- assertVisible:
+    id: "result-amount"
+- assertVisible:
+    id: "result-rate"

@@ -1,0 +1,13 @@
+appId: host.exp.Exponent
+---
+# Flow: App loads and displays currency converter
+- openLink: exp://127.0.0.1:8081
+- assertVisible:
+    id: "app-title"
+- assertVisible: "Conversor de Divisas"
+- assertVisible: "Cantidad"
+- assertVisible:
+    id: "amount-input"
+- assertVisible: "De"
+- assertVisible: "A"
+- assertVisible: "Convertir"
