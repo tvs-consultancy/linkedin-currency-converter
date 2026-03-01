@@ -50,13 +50,6 @@ describe('Worker fetch handler', () => {
 			expect(body.error).toContain('must differ');
 		});
 
-		it('returns 400 for both non-USD', async () => {
-			const res = await SELF.fetch(`${BASE}/convert?amount=100&from=EUR&to=JPY`);
-			expect(res.status).toBe(400);
-			const body = await res.json<{ error: string }>();
-			expect(body.error).toContain('Only USD');
-		});
-
 		it('returns 400 for unknown currency', async () => {
 			const res = await SELF.fetch(`${BASE}/convert?amount=100&from=USD&to=ZZZ`);
 			expect(res.status).toBe(400);
@@ -83,6 +76,16 @@ describe('Worker fetch handler', () => {
 			expect(body.from).toBe('EUR');
 			expect(body.to).toBe('USD');
 			expect(typeof body.convertedAmount).toBe('number');
+		});
+
+		it('converts any-to-any currencies (EUR to JPY)', async () => {
+			const res = await SELF.fetch(`${BASE}/convert?amount=100&from=EUR&to=JPY`);
+			expect(res.status).toBe(200);
+			const body = await res.json<{ from: string; to: string; convertedAmount: number }>();
+			expect(body.from).toBe('EUR');
+			expect(body.to).toBe('JPY');
+			expect(typeof body.convertedAmount).toBe('number');
+			expect(body.convertedAmount).toBeGreaterThan(0);
 		});
 
 		it('handles case-insensitive currency codes', async () => {
