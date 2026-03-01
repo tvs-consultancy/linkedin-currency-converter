@@ -1,4 +1,4 @@
-import { exchangeRates } from './csv-parser';
+import { fetchCurrencies, fetchRate } from './frankfurter';
 import { convert } from './converter';
 import type { ErrorResponse } from './types';
 
@@ -43,8 +43,12 @@ export default {
 
 		// GET /currencies endpoint
 		if (pathname === '/currencies') {
-			const currencies = Array.from(exchangeRates.keys()).sort();
-			return jsonResponse({ currencies });
+			try {
+				const currencies = await fetchCurrencies();
+				return jsonResponse({ currencies: Object.keys(currencies).sort() });
+			} catch {
+				return errorResponse('Failed to fetch currencies', 502);
+			}
 		}
 
 		// GET /convert endpoint
@@ -66,15 +70,20 @@ export default {
 				return errorResponse('from and to currencies must differ', 400);
 			}
 
-			if (from !== 'USD' && to !== 'USD') {
-				return errorResponse('Only USD conversions supported', 400);
-			}
-
 			try {
-				const result = convert(amount, from, to, exchangeRates);
+				const currencies = await fetchCurrencies();
+
+				if (!currencies[from]) return errorResponse(`Unknown currency code: ${from}`, 400);
+				if (!currencies[to]) return errorResponse(`Unknown currency code: ${to}`, 400);
+
+				const { rate } = await fetchRate(from, to);
+				const result = convert(amount, from, to, rate, currencies[to], Object.keys(currencies).length);
 				return jsonResponse(result);
 			} catch (e) {
-				return errorResponse((e as Error).message, 400);
+				if ((e as Error).message?.startsWith('Unknown currency code')) {
+					return errorResponse((e as Error).message, 400);
+				}
+				return errorResponse('Failed to fetch exchange rate', 502);
 			}
 		}
 
