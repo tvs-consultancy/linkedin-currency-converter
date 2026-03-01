@@ -39,6 +39,13 @@ export default function CurrencyConverter() {
     to !== '' &&
     from !== to;
 
+  const handleSwap = () => {
+    setFrom(to);
+    setTo(from);
+    setResult(null);
+    setError(null);
+  };
+
   const handleConvert = async () => {
     if (!isValid || loading) return;
     setLoading(true);
@@ -91,7 +98,7 @@ export default function CurrencyConverter() {
           />
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-[1fr_auto_1fr] gap-x-2 items-end">
           <div>
             <label htmlFor="from" className="block text-sm font-medium text-gray-700 mb-1">
               From
@@ -111,6 +118,32 @@ export default function CurrencyConverter() {
               ))}
             </select>
           </div>
+
+          <button
+            type="button"
+            onClick={handleSwap}
+            disabled={loading || currencies.length === 0}
+            aria-label="Swap currencies"
+            className="mb-0.5 p-2 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+              focusable="false"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M7 16l-4-4 4-4" />
+              <path d="M17 8l4 4-4 4" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+            </svg>
+          </button>
 
           <div>
             <label htmlFor="to" className="block text-sm font-medium text-gray-700 mb-1">
