@@ -7,3 +7,4 @@ packages/*/.wrangler/
 nul
 .next/
 *.tsbuildinfo
+test-results/
