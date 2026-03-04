@@ -14,4 +14,5 @@ Currency converter API that reads conversion rates from a CSV file. Built with T
 
 ## Development Process
 
-1. Before implementing, use DeepWiki's `ask_question` tool to get the latest information on relevant libraries so that code follows the most up-to-date APIs and patterns.
+1. **ALWAYS work in a feature branch** — never commit directly to `main`. Create a branch (e.g., `feature/...`, `fix/...`) before making any changes.
+2. Before implementing, use DeepWiki's `ask_question` tool to get the latest information on relevant libraries so that code follows the most up-to-date APIs and patterns.

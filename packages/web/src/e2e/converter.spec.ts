@@ -68,6 +68,27 @@ test('Convert button is disabled when From equals To', async ({ page }) => {
   await expect(page.getByText('Source and target currencies must differ.')).toBeVisible();
 });
 
+test('swap button swaps currencies and clears conversion result', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByLabel('From', { exact: true })).toHaveValue('USD');
+  await expect(page.getByLabel('To', { exact: true })).toHaveValue('EUR');
+
+  // Perform a conversion first
+  await page.getByLabel('Amount').fill('100');
+  await page.getByRole('button', { name: 'Convert' }).click();
+  await expect(page.getByText(/92\.50/)).toBeVisible();
+
+  // Click swap
+  await page.getByRole('button', { name: 'Swap currencies' }).click();
+
+  // Values should be swapped
+  await expect(page.getByLabel('From', { exact: true })).toHaveValue('EUR');
+  await expect(page.getByLabel('To', { exact: true })).toHaveValue('USD');
+
+  // Conversion result should be cleared
+  await expect(page.getByText(/92\.50/)).not.toBeVisible();
+});
+
 test('shows API error message when conversion fails', async ({ page }) => {
   // Override default convert mock with an error response
   await page.route(/\/convert/, (route) =>
