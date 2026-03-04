@@ -1,5 +1,6 @@
 import { fetchCurrencies, fetchRate } from './frankfurter';
 import { convert } from './converter';
+import { checkRateLimit } from './rate-limiter';
 import type { ErrorResponse } from './types';
 
 function jsonResponse(body: object, status = 200): Response {
@@ -34,6 +35,15 @@ export default {
 					'Access-Control-Allow-Headers': 'Content-Type',
 				},
 			});
+		}
+
+		// Rate limiting
+		const ip = request.headers.get('CF-Connecting-IP') ?? request.headers.get('X-Forwarded-For') ?? 'unknown';
+		const { allowed, retryAfterMs } = checkRateLimit(ip);
+		if (!allowed) {
+			const res = errorResponse('Too many requests', 429);
+			res.headers.set('Retry-After', String(Math.ceil(retryAfterMs / 1000)));
+			return res;
 		}
 
 		// All routes must be GET method
