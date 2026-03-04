@@ -1,5 +1,6 @@
 import { fetchCurrencies, fetchRate } from './frankfurter';
 import { convert } from './converter';
+import { checkRateLimit } from './rate-limiter';
 import type { ErrorResponse } from './types';
 
 function jsonResponse(body: object, status = 200): Response {
@@ -32,6 +33,20 @@ export default {
 					'Access-Control-Allow-Origin': '*',
 					'Access-Control-Allow-Methods': 'GET, OPTIONS',
 					'Access-Control-Allow-Headers': 'Content-Type',
+				},
+			});
+		}
+
+		// Rate limiting
+		const ip = request.headers.get('CF-Connecting-IP') ?? request.headers.get('X-Forwarded-For') ?? 'unknown';
+		const { allowed, retryAfterMs } = checkRateLimit(ip);
+		if (!allowed) {
+			return new Response(JSON.stringify({ error: 'Too many requests' }), {
+				status: 429,
+				headers: {
+					'Content-Type': 'application/json',
+					'Retry-After': String(Math.ceil(retryAfterMs / 1000)),
+					'Access-Control-Allow-Origin': '*',
 				},
 			});
 		}
