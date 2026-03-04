@@ -41,14 +41,9 @@ export default {
 		const ip = request.headers.get('CF-Connecting-IP') ?? request.headers.get('X-Forwarded-For') ?? 'unknown';
 		const { allowed, retryAfterMs } = checkRateLimit(ip);
 		if (!allowed) {
-			return new Response(JSON.stringify({ error: 'Too many requests' }), {
-				status: 429,
-				headers: {
-					'Content-Type': 'application/json',
-					'Retry-After': String(Math.ceil(retryAfterMs / 1000)),
-					'Access-Control-Allow-Origin': '*',
-				},
-			});
+			const res = errorResponse('Too many requests', 429);
+			res.headers.set('Retry-After', String(Math.ceil(retryAfterMs / 1000)));
+			return res;
 		}
 
 		// All routes must be GET method
