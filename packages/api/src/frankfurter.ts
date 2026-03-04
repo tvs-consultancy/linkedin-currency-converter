@@ -19,7 +19,11 @@ export async function fetchCurrencies(): Promise<Record<string, string>> {
 	const response = await fetch(`${FRANKFURTER_BASE}/currencies`);
 	if (!response.ok) throw new Error(`Frankfurter /currencies failed: ${response.status}`);
 
-	const data = (await response.json()) as Record<string, string>;
+	const raw: unknown = await response.json();
+	if (typeof raw !== 'object' || raw === null || Array.isArray(raw)) {
+		throw new Error('Frankfurter /currencies returned unexpected response shape');
+	}
+	const data = raw as Record<string, string>;
 	currenciesCache = { date: today, currencies: data };
 	return data;
 }
@@ -34,10 +38,22 @@ export async function fetchRate(from: string, to: string): Promise<{ rate: numbe
 	const response = await fetch(`${FRANKFURTER_BASE}/latest?base=${from}&symbols=${to}`);
 	if (!response.ok) throw new Error(`Frankfurter /latest failed: ${response.status}`);
 
-	const data = (await response.json()) as { base: string; date: string; rates: Record<string, number> };
+	const raw: unknown = await response.json();
+	if (
+		typeof raw !== 'object' || raw === null ||
+		!('rates' in raw) || typeof (raw as Record<string, unknown>).rates !== 'object' ||
+		!('date' in raw) || typeof (raw as Record<string, unknown>).date !== 'string'
+	) {
+		throw new Error('Frankfurter /latest returned unexpected response shape');
+	}
+	const data = raw as { base: string; date: string; rates: Record<string, number> };
+	const rate = data.rates[to];
+	if (typeof rate !== 'number' || !isFinite(rate) || rate <= 0) {
+		throw new Error(`Frankfurter returned invalid rate for ${to}`);
+	}
 	const existing = rateCache.get(from);
 	if (existing && existing.date === data.date) {
-		existing.rates[to] = data.rates[to];
+		rateCache.set(from, { ...existing, rates: { ...existing.rates, [to]: data.rates[to] } });
 	} else {
 		rateCache.set(from, { date: data.date, rates: { ...data.rates } });
 	}
