@@ -60,6 +60,44 @@ describe('fetchCurrencies', () => {
 
 		await expect(fetchCurrencies()).rejects.toThrow('Frankfurter /currencies failed: 503');
 	});
+
+	it('throws when response is an array', async () => {
+		vi.stubGlobal('fetch', makeFetchMock([] as unknown as object));
+
+		await expect(fetchCurrencies()).rejects.toThrow(
+			'Frankfurter /currencies returned unexpected response shape',
+		);
+	});
+
+	it('throws when response is a string', async () => {
+		vi.stubGlobal(
+			'fetch',
+			vi.fn().mockResolvedValue({
+				ok: true,
+				status: 200,
+				json: () => Promise.resolve('not-an-object'),
+			}),
+		);
+
+		await expect(fetchCurrencies()).rejects.toThrow(
+			'Frankfurter /currencies returned unexpected response shape',
+		);
+	});
+
+	it('throws when response is null', async () => {
+		vi.stubGlobal(
+			'fetch',
+			vi.fn().mockResolvedValue({
+				ok: true,
+				status: 200,
+				json: () => Promise.resolve(null),
+			}),
+		);
+
+		await expect(fetchCurrencies()).rejects.toThrow(
+			'Frankfurter /currencies returned unexpected response shape',
+		);
+	});
 });
 
 describe('fetchRate', () => {
@@ -127,5 +165,108 @@ describe('fetchRate', () => {
 		vi.stubGlobal('fetch', makeFetchMock({}, 503));
 
 		await expect(fetchRate('USD', 'EUR')).rejects.toThrow('Frankfurter /latest failed: 503');
+	});
+
+	it('throws when response is missing the rates field', async () => {
+		vi.stubGlobal('fetch', makeFetchMock({ base: 'USD', date: TODAY }));
+
+		await expect(fetchRate('USD', 'EUR')).rejects.toThrow(
+			'Frankfurter /latest returned unexpected response shape',
+		);
+	});
+
+	it('throws when response is missing the date field', async () => {
+		vi.stubGlobal('fetch', makeFetchMock({ base: 'USD', rates: { EUR: 0.89 } }));
+
+		await expect(fetchRate('USD', 'EUR')).rejects.toThrow(
+			'Frankfurter /latest returned unexpected response shape',
+		);
+	});
+
+	it('throws when response date is not a string', async () => {
+		vi.stubGlobal('fetch', makeFetchMock({ base: 'USD', date: 20241201, rates: { EUR: 0.89 } }));
+
+		await expect(fetchRate('USD', 'EUR')).rejects.toThrow(
+			'Frankfurter /latest returned unexpected response shape',
+		);
+	});
+
+	it('throws when response is an array', async () => {
+		vi.stubGlobal('fetch', makeFetchMock([] as unknown as object));
+
+		await expect(fetchRate('USD', 'EUR')).rejects.toThrow(
+			'Frankfurter /latest returned unexpected response shape',
+		);
+	});
+
+	it('throws when response is null', async () => {
+		vi.stubGlobal(
+			'fetch',
+			vi.fn().mockResolvedValue({
+				ok: true,
+				status: 200,
+				json: () => Promise.resolve(null),
+			}),
+		);
+
+		await expect(fetchRate('USD', 'EUR')).rejects.toThrow(
+			'Frankfurter /latest returned unexpected response shape',
+		);
+	});
+
+	it('throws when the rate for the requested symbol is not a number', async () => {
+		vi.stubGlobal(
+			'fetch',
+			makeFetchMock({ base: 'USD', date: TODAY, rates: { EUR: 'not-a-number' } }),
+		);
+
+		await expect(fetchRate('USD', 'EUR')).rejects.toThrow(
+			'Frankfurter returned invalid rate for EUR',
+		);
+	});
+
+	it('throws when the rate is zero', async () => {
+		vi.stubGlobal('fetch', makeFetchMock({ base: 'USD', date: TODAY, rates: { EUR: 0 } }));
+
+		await expect(fetchRate('USD', 'EUR')).rejects.toThrow(
+			'Frankfurter returned invalid rate for EUR',
+		);
+	});
+
+	it('throws when the rate is negative', async () => {
+		vi.stubGlobal('fetch', makeFetchMock({ base: 'USD', date: TODAY, rates: { EUR: -1.5 } }));
+
+		await expect(fetchRate('USD', 'EUR')).rejects.toThrow(
+			'Frankfurter returned invalid rate for EUR',
+		);
+	});
+
+	it('throws when the rate is Infinity', async () => {
+		vi.stubGlobal('fetch', makeFetchMock({ base: 'USD', date: TODAY, rates: { EUR: Infinity } }));
+
+		await expect(fetchRate('USD', 'EUR')).rejects.toThrow(
+			'Frankfurter returned invalid rate for EUR',
+		);
+	});
+
+	it('merges new symbol into existing cache entry immutably when date matches', async () => {
+		const mockFetch = vi
+			.fn()
+			.mockResolvedValueOnce({
+				ok: true,
+				json: () => Promise.resolve({ base: 'USD', date: TODAY, rates: { EUR: 0.89 } }),
+			})
+			.mockResolvedValueOnce({
+				ok: true,
+				json: () => Promise.resolve({ base: 'USD', date: TODAY, rates: { GBP: 0.79 } }),
+			});
+		vi.stubGlobal('fetch', mockFetch);
+
+		const first = await fetchRate('USD', 'EUR');
+		const second = await fetchRate('USD', 'GBP');
+
+		expect(first.rate).toBe(0.89);
+		expect(second.rate).toBe(0.79);
+		expect(mockFetch).toHaveBeenCalledTimes(2);
 	});
 });
