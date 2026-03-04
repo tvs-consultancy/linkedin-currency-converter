@@ -62,8 +62,8 @@ export default {
 			}
 
 			const amount = Number(amountStr);
-			if (isNaN(amount) || amount <= 0) {
-				return errorResponse('amount must be greater than zero', 400);
+			if (!isFinite(amount) || amount <= 0) {
+				return errorResponse('amount must be a finite number greater than zero', 400);
 			}
 
 			if (from === to) {

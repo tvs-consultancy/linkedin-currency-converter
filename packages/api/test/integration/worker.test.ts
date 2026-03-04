@@ -43,6 +43,20 @@ describe('Worker fetch handler', () => {
 			expect(res.status).toBe(400);
 		});
 
+		it('returns 400 for Infinity amount', async () => {
+			const res = await SELF.fetch(`${BASE}/convert?amount=Infinity&from=USD&to=EUR`);
+			expect(res.status).toBe(400);
+			const body = await res.json<{ error: string }>();
+			expect(body.error).toContain('finite');
+		});
+
+		it('returns 400 for 1e309 (overflow to Infinity) amount', async () => {
+			const res = await SELF.fetch(`${BASE}/convert?amount=1e309&from=USD&to=EUR`);
+			expect(res.status).toBe(400);
+			const body = await res.json<{ error: string }>();
+			expect(body.error).toContain('finite');
+		});
+
 		it('returns 400 for same from/to', async () => {
 			const res = await SELF.fetch(`${BASE}/convert?amount=100&from=USD&to=USD`);
 			expect(res.status).toBe(400);
