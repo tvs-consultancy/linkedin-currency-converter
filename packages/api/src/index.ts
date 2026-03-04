@@ -10,6 +10,9 @@ function jsonResponse(body: object, status = 200): Response {
 			'Access-Control-Allow-Origin': '*',
 			'Access-Control-Allow-Methods': 'GET, OPTIONS',
 			'Access-Control-Allow-Headers': 'Content-Type',
+			'X-Content-Type-Options': 'nosniff',
+			'Cache-Control': 'no-store',
+			'Referrer-Policy': 'no-referrer',
 		},
 	});
 }
@@ -32,6 +35,9 @@ export default {
 					'Access-Control-Allow-Origin': '*',
 					'Access-Control-Allow-Methods': 'GET, OPTIONS',
 					'Access-Control-Allow-Headers': 'Content-Type',
+					'X-Content-Type-Options': 'nosniff',
+					'Cache-Control': 'no-store',
+					'Referrer-Policy': 'no-referrer',
 				},
 			});
 		}
